@@ -16,21 +16,25 @@ export default function Header() {
       >
         {/* لوگو با بوردر چرخان */}
         <div className="flex items-center gap-3">
-          <div className="relative h-14 w-14
-           flex items-center justify-center">
+          <div
+            className="relative h-14 w-14
+           flex items-center justify-center"
+          >
             {/* بوردر چرخان */}
             <div
               className="absolute inset-0 rounded-full animate-spin"
               style={{
+                // ۳ بخش رنگی با فاصله ۳۰ درجه برای فضای خالی
                 background:
-                  "conic-gradient(from 0deg, #f59e0b 0%, #f59e0b 35%, transparent 35%, transparent 65%, #a855f7 65%, #a855f7 100%)",
+                  "conic-gradient(from 0deg, #f59e0b 0deg, #f59e0b 60deg, transparent 60deg, transparent 90deg, #a855f7 90deg, #a855f7 150deg, transparent 150deg, transparent 180deg, #f59e0b 180deg, #f59e0b 240deg, transparent 240deg, transparent 270deg, #a855f7 270deg, #a855f7 330deg, transparent 330deg)",
                 WebkitMask:
                   "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                 WebkitMaskComposite: "xor",
                 maskComposite: "exclude",
                 padding: "2px",
-                animationDuration: "3s",
+                animationDuration: "4s", // کمی نرم‌تر چرخیدن
                 animationTimingFunction: "linear",
+                animationIterationCount: "infinite",
               }}
             />
             {/* لوگو */}
@@ -49,8 +53,10 @@ export default function Header() {
         </div>
 
         {/* سوئیچر زبان */}
-        <div className="flex items-center bg-black/30 p-1 
-        rounded-2xl border border-white/10">
+        <div
+          className="flex items-center bg-black/30 p-1 
+        rounded-2xl border border-white/10"
+        >
           {(["ar", "en", "fa"] as const).map((lang) => (
             <Link
               key={lang}
