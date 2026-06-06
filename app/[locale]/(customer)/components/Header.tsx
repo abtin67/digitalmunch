@@ -10,12 +10,17 @@ export default function Header() {
   return (
     // فاصله از بالا و کناره‌ها برای شناور شدن
     <header className=" top-4 left-0 right-0 z-50 px-4">
-      <nav className="mx-auto max-w-5xl flex items-center justify-between p-3 rounded-3xl bg-[#370e57]/70 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+      <nav className="mx-auto max-w-7xl flex items-center
+       justify-between px-3 py-2 rounded-3xl bg-purple-900/45
+        backdrop-blur-2xl border border-white/10 
+        shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
         
         {/* بخش لوگو - خیلی مینیمال */}
         <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-2xl overflow-hidden ring-2 ring-amber-500/20">
-                <img src="/logo-munch.jpg" alt="logo" className="h-full w-full object-cover" />
+            <div className="h-12 w-12 rounded-2xl
+             overflow-hidden ring-2 ring-amber-500/20">
+                <img src="/logo-munch.jpg" alt="logo"
+                 className="h-full w-full object-cover" />
             </div>
             <h1 className="hidden sm:block font-black text-lg tracking-tighter text-white">
                 MUNCH<span className="text-amber-400">BOX</span>
@@ -23,12 +28,13 @@ export default function Header() {
         </div>
 
         {/* سوئیچر زبان مینیمال و شیشه‌ای */}
-        <div className="flex items-center bg-black/20 p-1 rounded-2xl border border-white/5">
+        <div className="flex items-center bg-black/30 p-1 rounded-2xl
+         border border-white/10">
           {['fa', 'en', 'ar'].map((lang) => (
             <Link
               key={lang}
               href={`/${lang}`}
-              className={`px-3 py-1.5 text-[10px] font-bold uppercase rounded-xl transition-all duration-300 ${
+              className={`px-3 py-1.5 text-[14px] font-bold uppercase rounded-xl transition-all duration-300 ${
                 locale === lang
                   ? "bg-white text-purple-900 shadow-sm"
                   : "text-white/50 hover:text-white"

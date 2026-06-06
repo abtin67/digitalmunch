@@ -24,10 +24,10 @@ export default function MenuCard({ item, onOpenModal }: MenuCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -100 }} // از سمت چپ (بغل) شروع کنه
+      initial={{ opacity: 0, x: -220 }} // از سمت چپ (بغل) شروع کنه
       whileInView={{ opacity: 1, x: 0 }} // وقتی رسید به دید کاربر، ظاهر شه
       viewport={{ once: true, margin: "-90px" }} // وقتی ۵۰ پیکسل از کارت وارد صفحه شد، انیمیشن شروع شه
-      transition={{ duration: 1.2, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       onClick={handleCardClick}
       className={`group relative flex flex-col
            justify-between overflow-hidden rounded-[2.2rem]
@@ -42,9 +42,10 @@ export default function MenuCard({ item, onOpenModal }: MenuCardProps) {
     >
       {/* بخش عکس محصول */}
       <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        initial={{ opacity: 0, y: -100, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 50, scale: 0.95 }}
+       
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         className="relative aspect-4/3 w-full overflow-hidden rounded-[1.6rem] bg-purple-950/20"
       >

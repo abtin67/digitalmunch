@@ -104,15 +104,15 @@ export default function CategoryBar({
   };
 
   return (
-    <div className="sticky mx-auto mt-3 max-w-4xl my-3 
-    top-4 left-0 w-full z-50">
+    <div className="sticky mx-auto mt-3 max-w-7xl my-3 
+    top-4 left-0 w-full px-3 z-50">
       <div
         ref={scrollRef}
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        className="flex items-center gap-2 p-2 mx-4 rounded-4xl scrollbar-none bg-[#370e57]/10 backdrop-blur-xl border border-white/5 shadow-lg overflow-x-auto transition-all duration-700"
+        className="flex items-center gap-2 p-3 mx-4 rounded-4xl scrollbar-none bg-[#370e57]/10 backdrop-blur-xl border border-white/5 shadow-lg overflow-x-auto transition-all duration-700"
         style={{ direction: isRtl ? "rtl" : "ltr" }}
       >
         {/* اضافه کردن gap و padding برای فاصله گرفتن از لبه‌ها */}
@@ -125,7 +125,8 @@ export default function CategoryBar({
                 key={cat.id}
                 // فراخوانی تابع هندلر جدید
                 onClick={() => handleCategoryClick(cat.id, index)}
-                className={`snap-start shrink-0 flex items-center gap-2  border border-[#160924]/20 rounded-full px-2 py-1 sm:px-4  transition-all duration-500
+                className={`snap-start shrink-0 flex items-center gap-2 
+                   border border-white/10 rounded-full px-2 py-1 sm:px-4  transition-all duration-500
                                 ${
                                   isActive
                                     ? "bg-amber-500 backdrop-blur-xl text-black shadow-[0_0_15px_rgba(245,158,11,0.25)]"
