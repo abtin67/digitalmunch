@@ -23,7 +23,7 @@ export default function SearchBar({
 
   return (
     <div
-      className="mx-auto max-w-7xl px-4 mt-6"
+      className="mx-auto hidden sm:block w-xl max-w-3xl px-4 mt-6"
       style={{ direction: isRtl ? "rtl" : "ltr" }}
     >
       <div className="relative flex items-center">

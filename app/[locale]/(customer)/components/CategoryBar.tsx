@@ -20,37 +20,38 @@ export default function CategoryBar({
     {
       id: "combo",
       name: { fa: "کمبو", en: "Combo", ar: "کامبو" },
-      iconEntiry: "/drink.png",
+      iconEntity: "/drink.png",
     },
     {
       id: "pizza",
       name: { fa: "پیتزا", en: "pizza", ar: "بیتزا" },
-      iconEntiry: "/pizza.png",
+      iconEntity: "/pizza.png",
     },
     {
       id: "pasta",
       name: { fa: "پاستا", en: "Pasta", ar: "باستا" },
-      iconEntiry: "/spaghetti.png",
+      iconEntity: "/spaghetti.png",
     },
     {
       id: "sandwich",
       name: { fa: "ساندویچ", en: "Sandwich", ar: "ساندویش" },
-      iconEntiry: "/sandwich.png",
+      iconEntity: "/sandwich.png",
     },
     {
       id: "burger",
       name: { fa: "برگر", en: "Burger", ar: "برغر" },
-      iconEntiry: "/cheese-burger.png",
+      iconEntity: "/cheese-burger.png",
     },
     {
       id: "fries",
       name: { fa: "پیش غذا", en: "Appetizers", ar: "المقبلات" },
-      iconEntiry: "/breadstick.png",
+      iconEntity: "/breadstick.png",
     },
   ];
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // تابع اسکرول به مرکز هنگام کلیک
   const handleCategoryClick = (catId: string, index: number) => {
     setActiveCategory(catId);
 
@@ -62,80 +63,90 @@ export default function CategoryBar({
 
     if (!target) return;
 
-    const containerWhidth = container.offsetWidth;
+    const containerWidth = container.offsetWidth;
     const targetLeft = target.offsetLeft;
-    const targetWhidth = target.offsetWidth;
+    const targetWidth = target.offsetWidth;
 
-    const scrollTo = targetLeft - containerWhidth / 2 + targetWhidth / 2;
+    const scrollTo = targetLeft - containerWidth / 2 + targetWidth / 2;
 
     container.scrollTo({
       left: scrollTo,
       behavior: "smooth",
     });
-
-    
   };
 
+  // لاجیک مربوط به اسکرول با موس (درگ کردن)
   const isDown = useRef(false);
-    const startX = useRef(0);
-    const scrollLeft = useRef(0);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
-    const handleMouseDown = (e: React.MouseEvent) => {
-      isDown.current = true;
-      startX.current = e.pageX - scrollRef.current!.offsetLeft;
-      scrollLeft.current = scrollRef.current!.scrollLeft;
-    };
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDown.current = true;
+    if (!scrollRef.current) return;
+    startX.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeft.current = scrollRef.current.scrollLeft;
+  };
 
-    const handleMouseLeave = () => {
-      isDown.current = false;
-    };
-    const handleMouseUp = () => {
-      isDown.current = false;
-    };
+  const handleMouseLeave = () => {
+    isDown.current = false;
+  };
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-      if (!isDown.current) return;
-      e.preventDefault();
-      const x = e.pageX - scrollRef.current!.offsetLeft;
-      const walk = (x - startX.current) * 1.5;
-      scrollRef.current!.scrollLeft = scrollLeft.current - walk;
-    };
+  const handleMouseUp = () => {
+    isDown.current = false;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown.current || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  };
 
   return (
-    <div className="sticky top-0 left-0 w-full bg-gradient-to-b from-slate-950 via-purple-950 to-purple-950/80  backdrop-blur-3xl shadow-md z-50">
+    <div className="sticky mx-auto mt-3 max-w-4xl my-3 
+    top-4 left-0 w-full z-50">
       <div
         ref={scrollRef}
-        
-        className="flex-1 overflow-x-auto overflow-y-scroll scroll-smooth whitespace-nowrap"
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        className="flex items-center gap-2 p-2 mx-4 rounded-4xl scrollbar-none bg-[#370e57]/10 backdrop-blur-xl border border-white/5 shadow-lg overflow-x-auto transition-all duration-700"
         style={{ direction: isRtl ? "rtl" : "ltr" }}
       >
-        <div className="inline-flex  items-center">
-        {categories.map((cat, index) => {
-          const isActive = activeCategory === cat.id;
+        {/* اضافه کردن gap و padding برای فاصله گرفتن از لبه‌ها */}
+        <div className="inline-flex items-center gap-2 px-1">
+          {categories.map((cat, index) => {
+            const isActive = activeCategory === cat.id;
 
-          return (
-            <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`snap-start shrink-0 flex items-center gap-2 rounded-full px-6 py-2 transition-all duration-500
+            return (
+              <button
+                key={cat.id}
+                // فراخوانی تابع هندلر جدید
+                onClick={() => handleCategoryClick(cat.id, index)}
+                className={`snap-start shrink-0 flex items-center gap-2  border border-[#160924]/20 rounded-full px-2 py-1 sm:px-4  transition-all duration-500
                                 ${
                                   isActive
-                                    ? "bg-amber-500 backdrop-blur-2xl text-black shadow-[0_0_15px_rgba(245,158,11,0.25)]"
-                                    : "bg-[#160924]/60 backdrop-blur-3xl text-gray-400 border-white/4 hover:text-white"
+                                    ? "bg-amber-500 backdrop-blur-xl text-black shadow-[0_0_15px_rgba(245,158,11,0.25)]"
+                                    : "bg-[#160924]/60 backdrop-blur-xl text-gray-400 border-white/4 hover:text-white"
                                 }
                                 `}
-            >
-              <img
-                src={cat.iconEntiry}
-                alt="icon"
-                className="object-cover shrink-0"
-                width={30}
-                height={30}
-              />
-              <span className="text-[18px] sm:text-md">{cat.name[locale]}</span>
-            </button>
-          );
-        })}
+              >
+                <img
+                  src={cat.iconEntity}
+                  alt={cat.id}
+                  draggable="false" // جلوگیری از کشیده شدن عکس حین درگ موس
+                  className="object-cover shrink-0 w-6 h-6 sm:w-8 sm:h-8 pointer-events-none"
+                  width={30}
+                  height={30}
+                />
+                <span className="text-[16px] sm:text-md pointer-events-none">
+                  {cat.name[locale]}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

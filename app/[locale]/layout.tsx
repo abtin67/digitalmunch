@@ -1,16 +1,22 @@
 import { ReactNode } from "react";
 
-interface LocaleLayoutProps{
+// 1. تغییر تایپ برای پذیرش Promise
+interface LocaleLayoutProps {
     children: ReactNode;
-    params: {locale: string}
+    params: Promise<{ locale: string }>; // اینجا را به Promise تغییر دادیم
 }
 
-export default function LocaleLayout({children , params}:LocaleLayoutProps){
+// 2. تابع را async کنید
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
     
-    const isRtl = params.locale === 'fa' || params.locale === 'ar'
-    return(
-        <div lang={params.locale} dir={isRtl ? 'rtl':'ltr'}>
+    // 3. مقدار params را await کنید
+    const { locale } = await params;
+    
+    const isRtl = locale === 'fa' || locale === 'ar';
+
+    return (
+        <div lang={locale} dir={isRtl ? 'rtl' : 'ltr'}>
             {children}
         </div>
-    )
+    );
 }
