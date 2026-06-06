@@ -85,8 +85,8 @@ export const mockMenuItems: MenuItem[] = [
       ar: "ساندویش روست بیف + بیتزا نوستالجیا + سلطة سیزر + باستا ألفریدو + بطاطس مقلیة + 5 مشروبات غازیة",
     },
     price: {
-      single: 3860,
-      double: 0,
+      single: 860,
+      double: 1950,
     },
   },
   {
@@ -107,8 +107,8 @@ export const mockMenuItems: MenuItem[] = [
       ar: "بیتزا نوستالجیا + سلطة سیزر + باستا ألفریدو + بطاطس مقلیة + 3 مشروبات غازیة",
     },
     price: {
-      single: 2414,
-      double: 0,
+      single: 1414,
+      double: 2100,
     },
   },
   {
