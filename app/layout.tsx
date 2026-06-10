@@ -22,7 +22,7 @@ export const metadata = {
   openGraph: {
     title: 'مانچ باکس',
     description: 'بهترین فست فود شهر',
-    images: ['/og-image.jpg'],
+    images: ['/logo-munch.jpg'],
     type: 'website',
   },
   twitter: {
