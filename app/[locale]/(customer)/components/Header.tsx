@@ -26,13 +26,13 @@ export default function Header() {
               style={{
                 // ۳ بخش رنگی با فاصله ۳۰ درجه برای فضای خالی
                 background:
-                  "conic-gradient(from 0deg, #f59e0b 0deg, #f59e0b 60deg, transparent 60deg, transparent 90deg, #a855f7 90deg, #a855f7 150deg, transparent 150deg, transparent 180deg, #f59e0b 180deg, #f59e0b 240deg, transparent 240deg, transparent 270deg, #a855f7 270deg, #a855f7 330deg, transparent 330deg)",
+                  "conic-gradient(from 0deg, #f59e0e 0deg, #f59e0b 60deg, transparent 60deg, transparent 90deg, #fff 90deg, #fff 150deg, transparent 150deg, transparent 180deg, #f59e0b 180deg, #fff 240deg, transparent 240deg, transparent 270deg, #fff 270deg, #fff 330deg, transparent 330deg)",
                 WebkitMask:
                   "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
                 WebkitMaskComposite: "xor",
                 maskComposite: "exclude",
                 padding: "2px",
-                animationDuration: "4s", // کمی نرم‌تر چرخیدن
+                animationDuration: "5s", // کمی نرم‌تر چرخیدن
                 animationTimingFunction: "linear",
                 animationIterationCount: "infinite",
               }}
