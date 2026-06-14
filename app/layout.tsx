@@ -47,7 +47,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // lang و dir توی [locale]/layout.tsx تنظیم میشه
     <html suppressHydrationWarning className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         {children}
