@@ -105,11 +105,14 @@ export default function MenuCard({
         {item.tags && item.tags.length > 0 && (
           <>
             {item.tags.includes("special") && (
-              <div className="absolute top-0 left-0 z-10 overflow-hidden w-28 h-28">
+              <div className="absolute top-0 left-0 z-10 
+              overflow-hidden w-28 h-28">
                 <div
-                  className="absolute flex items-center justify-center gap-1 text-[12px] font-black text-white"
+                  className="absolute flex items-center 
+                  justify-center gap-1 text-[12px] font-black
+                   text-white"
                   style={{
-                    background: "linear-gradient(135deg, #dc2626, #991b1b)",
+                    background: "red",
                     width: "140px",
                     top: "22px",
                     left: "-32px",
@@ -120,8 +123,8 @@ export default function MenuCard({
                     letterSpacing: "0.02em",
                   }}
                 >
-                  <span style={{ fontSize: "14px" }}>🔥</span>
-                  <span>
+                  <span style={{ fontSize: "16px" }}>🔥</span>
+                  <span className="font-bold text-[16px]">
                     {locale === "fa"
                       ? "پیشنهاد ویژه"
                       : locale === "ar"
@@ -148,7 +151,7 @@ export default function MenuCard({
                     letterSpacing: "0.02em",
                   }}
                 >
-                  <span>
+                  <span className="font-bold text-[16px]">
                     {
                       item.tags
                         .find((tag) => tag.startsWith("discount:"))
