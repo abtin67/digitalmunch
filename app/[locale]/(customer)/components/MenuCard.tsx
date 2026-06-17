@@ -59,7 +59,7 @@ export default function MenuCard({
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{
-        duration: 0.90,
+        duration: 0.9,
         ease: [0.23, 1, 0.32, 1], // easeOutExpo — طبیعی‌تر
         delay: (index % 4) * 0.08, // stagger بر اساس جای کارت در grid
       }}
@@ -68,10 +68,12 @@ export default function MenuCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}
-      className={`group relative flex flex-col justify-between overflow-hidden 
-        rounded-[2.2rem] border border-white/5 bg-[#160924]/40 
-        backdrop-blur-3xl p-3 transition-shadow duration-500 
-        hover:border-amber-500/30 hover:shadow-[0_15px_40px_rgba(245,158,11,0.12)]
+      className={`group relative flex flex-col
+         justify-between overflow-hidden 
+        rounded-2xl border border-white/10 bg-[#160924]/40 
+        backdrop-blur-3xl  transition-shadow duration-500 
+        hover:border-amber-500/30
+         hover:shadow-[0_15px_40px_rgba(245,158,11,0.12)]
         ${
           item.isAvailable
             ? "cursor-pointer"
@@ -80,7 +82,10 @@ export default function MenuCard({
       dir={isRtl ? "rtl" : "ltr"}
     >
       {/* بخش عکس */}
-      <div className="relative aspect-4/3 w-full overflow-hidden rounded-[1.6rem] bg-purple-950/20">
+      <div
+        className="relative aspect-4/3 w-full overflow-hidden
+       rounded-xl bg-purple-950/20"
+      >
         <motion.img
           src={item.image}
           alt={item.title[locale]}
@@ -91,40 +96,123 @@ export default function MenuCard({
         />
 
         {/* گرادیان پایین عکس */}
-        <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent" />
+        <div
+          className="absolute inset-0 bg-linear-to-t
+         from-black/30 via-transparent to-transparent"
+        />
+
+        {/* برچسب‌های گوشه */}
+        {item.tags && item.tags.length > 0 && (
+          <>
+            {item.tags.includes("special") && (
+              <div className="absolute top-0 left-0 z-10 overflow-hidden w-28 h-28">
+                <div
+                  className="absolute flex items-center justify-center gap-1 text-[12px] font-black text-white"
+                  style={{
+                    background: "linear-gradient(135deg, #dc2626, #991b1b)",
+                    width: "140px",
+                    top: "22px",
+                    left: "-32px",
+                    transform: "rotate(-45deg)",
+                    padding: "6px 0",
+                    boxShadow: "0 3px 12px rgba(220,38,38,0.6)",
+                    textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  <span style={{ fontSize: "14px" }}>🔥</span>
+                  <span>
+                    {locale === "fa"
+                      ? "پیشنهاد ویژه"
+                      : locale === "ar"
+                        ? "عرض خاص"
+                        : "Special"}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {item.tags.find((tag) => tag.startsWith("discount:")) && (
+              <div className="absolute top-0 right-0 z-10 overflow-hidden w-28 h-28">
+                <div
+                  className="absolute flex items-center justify-center text-[12px] font-black text-white"
+                  style={{
+                    background: "linear-gradient(135deg, #16a34a, #14532d)",
+                    width: "140px",
+                    top: "22px",
+                    right: "-32px",
+                    transform: "rotate(45deg)",
+                    padding: "6px 0",
+                    boxShadow: "0 3px 12px rgba(22,163,74,0.6)",
+                    textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  <span>
+                    {
+                      item.tags
+                        .find((tag) => tag.startsWith("discount:"))
+                        ?.split(":")[1]
+                    }
+                    %
+                    {locale === "fa"
+                      ? " تخفیف"
+                      : locale === "ar"
+                        ? " خصم"
+                        : " OFF"}
+                  </span>
+                </div>
+              </div>
+            )}
+          </>
+        )}
 
         {/* برچسب ناموجود */}
         {!item.isAvailable && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-[3px]"
+          <div
+            className="absolute inset-0 z-10 flex items-center
+  justify-center bg-black/70 "
           >
-            <span className="rounded-xl bg-red-500 px-4 py-1.5 text-xs font-bold text-white shadow-lg shadow-red-500/20">
+            <span
+              className="rounded-xl z-20 ring-2 ring-red-200
+  bg-black/70 px-5 py-2
+  font-bold text-red-200
+  shadow-lg shadow-red-500/50"
+            >
               {dict.unavailable}
             </span>
-          </motion.div>
+          </div>
         )}
       </div>
 
       {/* بخش اطلاعات */}
-      <div className="flex flex-1 flex-col justify-between pt-4 px-2">
-        <h2 className="text-lg font-bold text-white transition-colors duration-300 group-hover:text-amber-400">
+      <div className="flex flex-1 py-2 px-5 flex-col justify-between pt-2">
+        <h2
+          className="text-lg font-bold text-white
+         transition-colors duration-300 group-hover:text-amber-400"
+        >
           {item.title[locale]}
         </h2>
 
         {/* قیمت و دکمه */}
-        <div className="mt-5 flex items-center justify-between border-t border-white/5 pt-3">
+        <div
+          className="mt-3 flex items-center justify-between
+         border-t border-white/5 pt-1"
+        >
           <div className="flex flex-col">
             <span className="text-[13px] font-medium text-gray-400">
-              {locale === "fa" ? "تک نفره" : locale === "ar" ? "فردي" : "Single"}
+              {locale === "fa"
+                ? "تک نفره"
+                : locale === "ar"
+                  ? "فردي"
+                  : "Single"}
             </span>
             <div className="flex items-baseline gap-1">
               <span className="font-sans text-xl font-black text-amber-400">
                 {item.price.single.toLocaleString()}
               </span>
-              <span className="text-xs font-medium text-gray-500">
-                {locale === "fa" ? "تومان" : locale === "ar" ? "ت" : "T"}
+              <span className="text-xl font-medium text-gray-500">
+                {locale === "fa" ? "ت" : locale === "ar" ? "T" : "T"}
               </span>
             </div>
           </div>

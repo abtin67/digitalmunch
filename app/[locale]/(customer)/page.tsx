@@ -9,6 +9,7 @@ import CategoryBar from "./components/CategoryBar";
 import MenuCard from "./components/MenuCard";
 import MenuModal from "./components/MenuModal";
 import Header from "./components/Header";
+import GradientBackground from "./components/GradientBackground";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -37,7 +38,8 @@ export default function CustomerMenuPage({ params }: Props) {
   });
 
   return (
-    <main className="min-h-screen px-1 pt-2 md:px-8 bg-[#2a1044] pb-24 text-white">
+    <main className="min-h-screen relative px-1 pt-2 md:px-8  pb-24 text-white">
+     <GradientBackground />
       <Header />
       <CategoryBar
         activeCategory={activeCategory}

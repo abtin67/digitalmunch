@@ -72,7 +72,7 @@ export const mockMenuItems: MenuItem[] = [
     slug: "munch-box-combo",
     category: "combo",
     image: "/images/combo3.jpg",
-    tags: ["popular", "family"],
+    tags: ["special", "family"],
     isAvailable: true,
     title: {
       fa: "کمبو مانچ باکس",
@@ -94,7 +94,7 @@ export const mockMenuItems: MenuItem[] = [
     slug: "nostalgia-pizza-combo",
     category: "combo",
     image: "/images/combo2.jpg",
-    tags: ["popular"],
+    tags: ["discount:20"],
     isAvailable: true,
     title: {
       fa: "کمبو پیتزا نوستالژی",
@@ -117,7 +117,7 @@ export const mockMenuItems: MenuItem[] = [
     category: "combo",
     image: "/images/combo1.jpg",
     tags: [],
-    isAvailable: true,
+    isAvailable: false,
     title: {
       fa: "کمبو پیتزا مرغ و قارچ",
       en: "Chicken & Mushroom Pizza Combo",

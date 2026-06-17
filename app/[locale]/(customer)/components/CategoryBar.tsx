@@ -126,7 +126,7 @@ export default function CategoryBar({
                 // فراخوانی تابع هندلر جدید
                 onClick={() => handleCategoryClick(cat.id, index)}
                 className={`snap-start shrink-0 flex items-center gap-2 
-                   border border-white/10 rounded-full px-2 py-1 sm:px-4  transition-all duration-500
+                   border border-white/10 rounded-full px-3 py-1.5 sm:px-4  transition-all duration-500
                                 ${
                                   isActive
                                     ? "bg-amber-500 backdrop-blur-xl text-black shadow-[0_0_15px_rgba(245,158,11,0.25)]"
