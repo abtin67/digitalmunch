@@ -35,7 +35,7 @@ export default function MenuModal({ item, onClose }: MenuModalProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[1000] flex items-end sm:items-center justify-center p-4 backdrop-blur-sm bg-black/60"
+      className="fixed inset-0 z-1000 flex items-end sm:items-center justify-center p-4 backdrop-blur-sm bg-black/60"
     >
       <div className="absolute inset-0" onClick={onClose} />
 
@@ -53,7 +53,7 @@ export default function MenuModal({ item, onClose }: MenuModalProps) {
             alt={item.title[locale]}
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#160924] via-[#160924]/20 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-[#160924] via-[#160924]/20 to-transparent" />
 
           {/* دکمه بستن */}
           <button
