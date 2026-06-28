@@ -24,7 +24,8 @@ export async function POST(req:NextRequest){
         const body = await req.json()
 
         const category = await Category.create({
-            name:body.name
+            name:body.name,
+            icon: body.icon || "",
         })
 
         return NextResponse.json(

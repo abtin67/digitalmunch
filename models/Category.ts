@@ -7,7 +7,12 @@ const CategorySchema = new Schema(
       ar: { type: String, required: true },
       en: { type: String, required: true },
     },
+     icon: {
+      type: String,
+      default: "",
+    },
   },
+
   { timestamps: true }
 );
 

@@ -11,7 +11,7 @@ interface Params {
 // UPDATE
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await dbConnect();
@@ -32,6 +32,10 @@ export async function PATCH(
     if (body.name?.en) {
       updateData["name.en"] = body.name.en;
     }
+    
+    if (body.icon !== undefined) {
+      updateData["icon"] = body.icon;
+    }
 
     const updatedCategory = await Category.findByIdAndUpdate(
       id,
@@ -39,7 +43,7 @@ export async function PATCH(
       {
         new: true,
         runValidators: true,
-      }
+      },
     );
 
     if (!updatedCategory) {
@@ -48,7 +52,7 @@ export async function PATCH(
           success: false,
           message: "Category not found",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -62,7 +66,7 @@ export async function PATCH(
         success: false,
         error: String(error),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -70,7 +74,7 @@ export async function PATCH(
 // DELETE
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await dbConnect();
@@ -87,7 +91,7 @@ export async function DELETE(
           success: false,
           message: "Category not found",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -101,7 +105,7 @@ export async function DELETE(
         success: false,
         error: String(error),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

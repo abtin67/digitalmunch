@@ -5,18 +5,31 @@ export interface MultilingualText{
 }
 
 export interface ItemPrice {
-    single: number;
-    double?:number;
+  single: number;
+  double: number;
+  discountedSingle?: number | null; // اضافه شد
+  discountedDouble?: number | null; // اضافه شد
 }
 
-export interface MenuItem{
-    id:string;
-    slug: string;
-    title: MultilingualText;
-    description: MultilingualText;
-    price: ItemPrice;
-    image: string;
-    category: string;
-    isAvailable: boolean;
-    tags?:string[];
+export interface ItemOffer {
+  isSpecial: boolean;
+  discountPercent: number;
+  expiresAt?: string | Date | null;
+}
+
+export interface Category {
+  _id: string;
+  name: MultilingualText;
+}
+
+export interface MenuItem {
+  _id: string;
+  title: MultilingualText;
+  description: MultilingualText;
+  price: ItemPrice;
+  offer?: ItemOffer;
+  category: string | Category;
+  image: string;
+  isAvailable: boolean;
+  tags: string[];
 }

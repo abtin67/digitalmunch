@@ -2,10 +2,9 @@ import dbConnect from "@/lib/db";
 import item from "@/models/item";
 import { NextRequest, NextResponse } from "next/server";
 
-
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await dbConnect();
@@ -14,19 +13,19 @@ export async function GET(
 
     const itemOne = await item.findById(id).populate("category");
 
-    if (!item) {
+    if (!itemOne) {
       return NextResponse.json(
         {
           success: false,
           message: "Item not found",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     return NextResponse.json({
       success: true,
-      data: item,
+      data: itemOne,
     });
   } catch (error) {
     return NextResponse.json(
@@ -34,32 +33,33 @@ export async function GET(
         success: false,
         error: String(error),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
-
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await dbConnect();
 
     const { id } = await params;
     const body = await req.json();
-
-    const updatedItem = await item.findByIdAndUpdate(
-      id,
-      {
-        $set: body,
-      },
-      {
-        new: true,
-        runValidators: true,
-      }
-    ).populate("category");
+    console.log(body);
+    const updatedItem = await item
+      .findByIdAndUpdate(
+        id,
+        {
+          $set: body,
+        },
+        {
+          new: true,
+          runValidators: true,
+        },
+      )
+      .populate("category");
 
     if (!updatedItem) {
       return NextResponse.json(
@@ -67,7 +67,7 @@ export async function PATCH(
           success: false,
           message: "Item not found",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -81,14 +81,14 @@ export async function PATCH(
         success: false,
         error: String(error),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await dbConnect();
@@ -103,7 +103,7 @@ export async function DELETE(
           success: false,
           message: "Item not found",
         },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -117,7 +117,7 @@ export async function DELETE(
         success: false,
         error: String(error),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

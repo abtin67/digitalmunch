@@ -102,72 +102,54 @@ export default function MenuCard({
         />
 
         {/* برچسب‌های گوشه */}
-        {item.tags && item.tags.length > 0 && (
-          <>
-            {item.tags.includes("special") && (
-              <div className="absolute top-0 left-0 z-10 
-              overflow-hidden w-28 h-28">
-                <div
-                  className="absolute flex items-center 
-                  justify-center gap-1 text-[12px] font-black
-                   text-white"
-                  style={{
-                    background: "red",
-                    width: "140px",
-                    top: "22px",
-                    left: "-32px",
-                    transform: "rotate(-45deg)",
-                    padding: "6px 0",
-                    boxShadow: "0 3px 12px rgba(220,38,38,0.6)",
-                    textShadow: "0 1px 2px rgba(0,0,0,0.5)",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  <span style={{ fontSize: "16px" }}>🔥</span>
-                  <span className="font-bold text-[16px]">
-                    {locale === "fa"
-                      ? "پیشنهاد ویژه"
-                      : locale === "ar"
-                        ? "عرض خاص"
-                        : "Special"}
-                  </span>
-                </div>
-              </div>
-            )}
+        {item.offer?.isSpecial && (
+          <div className="absolute top-0 left-0 z-10 overflow-hidden w-28 h-28">
+            <div
+              className="absolute flex items-center justify-center gap-1 text-[12px] font-black text-white"
+              style={{
+                background: "red",
+                width: "140px",
+                top: "22px",
+                left: "-32px",
+                transform: "rotate(-45deg)",
+                padding: "6px 0",
+                boxShadow: "0 3px 12px rgba(220,38,38,0.6)",
+                textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+              }}
+            >
+              <span style={{ fontSize: "15px" }}>🔥</span>
+              <span className="font-bold text-[16px]">
+                {locale === "fa"
+                  ? "پیشنهاد ویژه"
+                  : locale === "ar"
+                    ? "عرض خاص"
+                    : "Special"}
+              </span>
+            </div>
+          </div>
+        )}
 
-            {item.tags.find((tag) => tag.startsWith("discount:")) && (
-              <div className="absolute top-0 right-0 z-10 overflow-hidden w-28 h-28">
-                <div
-                  className="absolute flex items-center justify-center text-[12px] font-black text-white"
-                  style={{
-                    background: "linear-gradient(135deg, #16a34a, #14532d)",
-                    width: "140px",
-                    top: "22px",
-                    right: "-32px",
-                    transform: "rotate(45deg)",
-                    padding: "6px 0",
-                    boxShadow: "0 3px 12px rgba(22,163,74,0.6)",
-                    textShadow: "0 1px 2px rgba(0,0,0,0.5)",
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  <span className="font-bold text-[16px]">
-                    {
-                      item.tags
-                        .find((tag) => tag.startsWith("discount:"))
-                        ?.split(":")[1]
-                    }
-                    %
-                    {locale === "fa"
-                      ? " تخفیف"
-                      : locale === "ar"
-                        ? " خصم"
-                        : " OFF"}
-                  </span>
-                </div>
-              </div>
-            )}
-          </>
+        {(item.offer?.discountPercent ?? 0) > 0 && (
+          <div className="absolute top-0 right-0 z-10 overflow-hidden w-28 h-28">
+            <div
+              className="absolute flex items-center justify-center text-[12px] font-black text-white"
+              style={{
+                background: "linear-gradient(135deg, #16a34a, #14532d)",
+                width: "140px",
+                top: "22px",
+                right: "-32px",
+                transform: "rotate(45deg)",
+                padding: "6px 0",
+                boxShadow: "0 3px 12px rgba(22,163,74,0.6)",
+                textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+              }}
+            >
+              <span className="font-bold text-[16px]">
+                {item.offer?.discountPercent}%
+                {locale === "fa" ? " تخفیف" : locale === "ar" ? " خصم" : " OFF"}
+              </span>
+            </div>
+          </div>
         )}
 
         {/* برچسب ناموجود */}
@@ -210,12 +192,23 @@ export default function MenuCard({
                   ? "فردي"
                   : "Single"}
             </span>
-            <div className="flex items-baseline gap-1">
-              <span className="font-sans text-xl font-black text-amber-400">
-                {item.price.single.toLocaleString()}
-              </span>
+            <div className="flex items-baseline gap-2">
+              {item.price.discountedSingle ? (
+                <>
+                  <span className="font-sans text-sm font-medium text-gray-500 line-through">
+                    {item.price.single.toLocaleString()}
+                  </span>
+                  <span className="font-sans text-xl font-black text-amber-400">
+                    {item.price.discountedSingle.toLocaleString()}
+                  </span>
+                </>
+              ) : (
+                <span className="font-sans text-xl font-black text-amber-400">
+                  {item.price.single.toLocaleString()}
+                </span>
+              )}
               <span className="text-xl font-medium text-gray-500">
-                {locale === "fa" ? "ت" : locale === "ar" ? "T" : "T"}
+                {locale === "fa" ? "ت" : "T"}
               </span>
             </div>
           </div>
